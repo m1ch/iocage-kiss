@@ -9,7 +9,11 @@ NEXTCLOUD_JAIL="test_nextcloud"
 iocage fetch --plugin-name "mariadb-kiss" \
     --git_repository https://github.com/m1ch/iocage-plugin-index \
     --branch kiss \
-    --name $MARIADB_JAIL interfaces="vnet0:bridge10" ip4_addr="vnet0|$MARIADB_IP/24" vnet=1 defaultrouter="10.23.10.1" resolver="search local;nameserver 1.1.1.1"
+    --name $MARIADB_JAIL \
+        interfaces="vnet0:bridge10" \
+        ip4_addr="vnet0|$MARIADB_IP/24" \
+        vnet=1 defaultrouter="10.23.10.1" \
+        resolver="search local;nameserver 1.1.1.1"
 
 # Create DB for mariaDB
 iocage exec $MARIADB_JAIL bash -c 'PASS=$(</root/mysqlrootpassword); mysql -u root -p"${PASS}"<<EOF
@@ -21,7 +25,11 @@ DROP DATABASE  IF EXISTS testDB;
 show databases;
 EOF'
 
+exit
 # install redis
+iocage create -r 12.2-RELEASE -n redis vnet=On dhcp=Off nat=On
+iocage pkg redis install redis
+
 
 #install php-fpm
 
