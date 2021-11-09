@@ -30,6 +30,7 @@ exit
 iocage create -r 12.2-RELEASE -n redis vnet=On dhcp=Off nat=On
 iocage pkg redis install redis
 # https://guides.wp-bullet.com/how-to-configure-redis-to-use-unix-socket-speed-boost/
+# ssh -nNT -L $(pwd)/docker.sock:/var/run/docker.sock user@someremote
 
 
 #install php-fpm
