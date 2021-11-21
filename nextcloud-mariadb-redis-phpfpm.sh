@@ -57,7 +57,10 @@ iocage pkg redis install redis
 # ssh -nNT -L $(pwd)/docker.sock:/var/run/docker.sock user@someremote
 
 
-#install php-fpm
+# install php-fpm
+
+
+# install nginx
 
 # install nextcloud
 
